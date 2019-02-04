@@ -1,0 +1,65 @@
+---
+stages:
+- name: Build
+  inputs:
+  - type: git
+    service: ${SAMPLE_REPO}
+    branch: master
+    dir_name: null
+  permission:
+    execute: TOOLCHAIN_ADMINS
+  properties:
+  - name: API_KEY
+    value: ${API_KEY}
+    type: secure
+  - name: NODE_PATH
+    type: text
+    value: /opt/IBM/node-v6.7/bin
+  jobs:
+  - name: Build
+    type: builder
+    artifact_dir: target
+    build_type: shell
+    script: |-
+      #!/bin/bash
+      # your script here
+      ./pipeline/build.sh
+- name: Deploy
+  inputs:
+  - type: job
+    stage: Build
+    job: Build
+    dir_name: null
+  triggers:
+  - type: stage
+  permission:
+    execute: TOOLCHAIN_ADMINS
+  properties:
+  - name: DEPLOYER_API_KEY
+    type: secure
+    value: ${DEPLOYER_API_KEY}
+  - name: CF_APP_NAME
+    type: text
+    value: ${CF_APP_NAME}
+  - name: PROD_SPACE_NAME
+    type: text
+    value: ${PROD_SPACE_NAME}
+  - name: PROD_ORG_NAME
+    type: text
+    value: ${PROD_ORG_NAME}
+  - name: PROD_REGION_ID
+    type: text
+    value: ${PROD_REGION_ID}
+  jobs:
+  - name: Deploy
+    type: deployer
+    deploy_type: customimage
+    script: |-
+      #!/bin/bash
+      #set -x #echo on
+      ./pipeline/deploy.sh
+hooks:
+- enabled: true
+  label: null
+  ssl_enabled: false
+  url: http://lms-api/v1/messaging/webhook/publish
