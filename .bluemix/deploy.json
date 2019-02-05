@@ -26,7 +26,7 @@
             "description": "The IBM Cloud space",
             "type": "string"
         },
-        "prod-resourcegroup": {
+        "prod-resource-group": {
             "description": "The IBM Cloud resource group",
             "type": "string"
         },
@@ -122,7 +122,7 @@
                 },
                 {
                     "type": "select",
-                    "key": "prod-resourcegroup",
+                    "key": "prod-resource-group",
                     "readonly": false
                 }
             ]
