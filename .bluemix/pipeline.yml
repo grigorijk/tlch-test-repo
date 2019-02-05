@@ -18,11 +18,9 @@ stages:
   jobs:
   - name: Build
     type: builder
-    artifact_dir: target
     build_type: shell
     script: |-
       #!/bin/bash
-      # your script here
       ./pipeline/build.sh
 - name: Deploy
   inputs:
@@ -56,7 +54,7 @@ stages:
     deploy_type: customimage
     script: |-
       #!/bin/bash
-      #set -x #echo on
+      set -x #echo on
       ./pipeline/deploy.sh
 hooks:
 - enabled: true
