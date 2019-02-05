@@ -26,10 +26,6 @@
             "description": "The IBM Cloud space",
             "type": "string"
         },
-        "prod-resource-group": {
-            "description": "The IBM Cloud resource group",
-            "type": "string"
-        },
         "api-key": {
             "description": "API key for deployment",
             "type": "string"
@@ -118,11 +114,6 @@
                 {
                     "type": "select",
                     "key": "prod-space",
-                    "readonly": false
-                },
-                {
-                    "type": "select",
-                    "key": "prod-resource-group",
                     "readonly": false
                 }
             ]
