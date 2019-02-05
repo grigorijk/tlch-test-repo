@@ -16,7 +16,7 @@ template:
     git branch: >-
       [master](https://github.com/grigorijk/tlch-test-repo/tree/master)
 toolchain:
-  name: 'sample-function'
+  name: 'sample-function-{{timestamp}}'
   template:
     getting_started:
       $ref: "#/messages/template.gettingStarted"
@@ -27,8 +27,8 @@ services:
       repo_name: '{{toolchain.name}}'
       repo_url: 'https://github.com/grigorijk/tlch-test-repo'
       type: link
-      has_issues: false
-      enable_traceability: false
+      has_issues: true
+      enable_traceability: true
   sample-build:
     service_id: pipeline
     parameters:
